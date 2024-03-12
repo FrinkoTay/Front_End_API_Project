@@ -8,7 +8,6 @@ const Articles = () => {
     useEffect(() => {
         getArticles()
         .then((fetchedArticles) => {
-            console.log(fetchedArticles)
             setArticles(fetchedArticles)
         })
     }, [])
