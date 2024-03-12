@@ -21,3 +21,12 @@ body {
     color: inherit;
     text-decoration: inherit;
 }
+
+.comment-card {
+    background-color: rgb(96, 189, 169);
+    width: 70vw;
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin: 10px;
+}

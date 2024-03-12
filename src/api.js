@@ -20,8 +20,9 @@ export const getArticleById = (article_id) => {
     })
 }
 
-export const getCategories = () => {
-    return shopApi.get('/categories')
+export const getCommentsByArticleId = (article_id) => {
+    console.log('in getCommentsByArticleId')
+    return shopApi.get(`/articles/${article_id}/comments`)
     .then((response) => {
         return response.data
     })
