@@ -27,3 +27,13 @@ export const getCommentsByArticleId = (article_id) => {
         return response.data
     })
 }
+
+export const patchArticleVotes = (article_id, increment) => {
+    console.log('in patchArticleVotes')
+    return shopApi.patch(`/articles/${article_id}`, {
+        inc_votes: increment
+    })
+    .then((response) => {
+        return response.data
+    })
+}
