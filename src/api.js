@@ -12,6 +12,14 @@ export const getArticles = () => {
     })
 }
 
+export const getArticleById = (article_id) => {
+    console.log('in getArticleByID')
+    return shopApi.get(`/articles/${article_id}`)
+    .then((response) => {
+        return response.data
+    })
+}
+
 export const getCategories = () => {
     return shopApi.get('/categories')
     .then((response) => {

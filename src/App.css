@@ -16,3 +16,8 @@ body {
     max-height: 334px;
     max-width: 501px;
 }
+
+.text-link {
+    color: inherit;
+    text-decoration: inherit;
+}
