@@ -5,7 +5,6 @@ import { getArticleById } from '../api';
 const SingleArticle = () => {
     const { article_id } = useParams()
     const [article, setArticle] = useState({})
-    const dateCreated = ""
 
     useEffect(() => {
         getArticleById(article_id)
