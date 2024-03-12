@@ -2,7 +2,7 @@
 
 ### Routes
 
-- /api/homepage
+- /api/
     functionality:
     - Welcoming message
 

@@ -1,1 +1,18 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+.article-card {
+    background-color: rgb(80, 196, 80);
+    width: 80vw;
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin: 10px;
+}
+
+.article-img {
+    width: 70vw;
+    max-height: 334px;
+    max-width: 501px;
+}
