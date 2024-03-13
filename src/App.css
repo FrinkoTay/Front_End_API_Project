@@ -30,3 +30,12 @@ body {
     margin-bottom: 10px;
     margin: 10px;
 }
+
+.add-comment-card {
+    background-color: rgb(5, 170, 134);
+    width: 70vw;
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    margin: 10px;
+}
