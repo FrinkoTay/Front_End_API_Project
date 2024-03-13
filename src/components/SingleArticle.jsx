@@ -6,11 +6,14 @@ const SingleArticle = () => {
     const { article_id } = useParams()
     const [article, setArticle] = useState({})
     const [errorMsg, setErrorMsg] = useState('')
+    const [isLoading, setIsLoading] = useState('')
 
     const fetchArticle = () => {
+        setIsLoading('Loading Article...')
         getArticleById(article_id)
         .then((fetchedArticles) => {
-            return setArticle(fetchedArticles)
+            setArticle(fetchedArticles)
+            setIsLoading('')
         })
     }
 
@@ -34,22 +37,27 @@ const SingleArticle = () => {
         })
     }
 
-    return <div className="article-card">
-        <h3>{article.title}</h3>
-        <p>Author: {article.author} </p>
-        <p>Date Posted: {article.created_at} {/*
-        article.created_at === undefined ? 
-        ""
-        : toLocaleString(Date(Date.parse(article.created_at)))
-        */} </p>
-        <p>Topic: {article.topic} </p>
-        <p>Comments: {article.comment_count} </p>
-        <p> {article.body} </p>
-        <img className="article-img" src={ article.article_img_url }></img>
-        <p>Votes:  {article.votes} </p>
-        <button onClick={() => {incrementCount(1)}}> Upvote </button>
-        <button onClick={() => {incrementCount(-1)}}> Downvote </button>
-        <p> {errorMsg} </p>
+    return <div>
+        <h1>
+            {isLoading}
+        </h1>
+        <div className="article-card">
+            <h3>{article.title}</h3>
+            <p>Author: {article.author} </p>
+            <p>Date Posted: {article.created_at} {/*
+            article.created_at === undefined ? 
+            ""
+            : toLocaleString(Date(Date.parse(article.created_at)))
+            */} </p>
+            <p>Topic: {article.topic} </p>
+            <p>Comments: {article.comment_count} </p>
+            <p> {article.body} </p>
+            <img className="article-img" src={ article.article_img_url }></img>
+            <p>Votes:  {article.votes} </p>
+            <button onClick={() => {incrementCount(1)}}> Upvote </button>
+            <button onClick={() => {incrementCount(-1)}}> Downvote </button>
+            <p> {errorMsg} </p>
+        </div>
     </div>
 }
 
