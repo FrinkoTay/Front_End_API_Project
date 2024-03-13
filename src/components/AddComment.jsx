@@ -1,11 +1,14 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { postArticleComment } from '../api';
+import UserContext from '../contexts/User';
 
 const AddComment = ({ setComments, setAddCommentCount }) => {
     const { article_id } = useParams()
     const [infoMsg, setInfoMsg] = useState('')
     const [newComment, setNewComment] = useState('')
+    const userLoggedIn = useContext(UserContext)
+    console.log(userLoggedIn)
 
     const submitComment = (event) => {
         event.preventDefault()
@@ -18,7 +21,7 @@ const AddComment = ({ setComments, setAddCommentCount }) => {
             }, ...currComments]
         })
         // default user set to 'jessjelly'
-        postArticleComment(article_id, 'jessjelly', newComment)
+        postArticleComment(article_id, userLoggedIn, newComment)
         .then(() => {
             setInfoMsg('Comment Posted!')
             setAddCommentCount((currCount) => {currCount++})
