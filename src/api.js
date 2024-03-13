@@ -37,3 +37,10 @@ export const patchArticleVotes = (article_id, increment) => {
         return response.data
     })
 }
+
+export const postArticleComment = (article_id, user, commentBody) => {
+    return shopApi.post(`/articles/${article_id}/comments`, {
+        username: user,
+        body:commentBody
+    })
+}
