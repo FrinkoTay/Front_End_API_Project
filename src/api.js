@@ -44,3 +44,7 @@ export const postArticleComment = (article_id, user, commentBody) => {
         body:commentBody
     })
 }
+
+export const deleteComment = (comment_id) => {
+    return shopApi.delete(`/comments/${comment_id}`)
+}

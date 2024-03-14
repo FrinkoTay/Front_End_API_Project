@@ -3,13 +3,12 @@ import { useState, useEffect, useContext } from "react"
 import { postArticleComment } from '../api';
 import UserContext from '../contexts/User';
 
-const AddComment = ({ setComments, setAddCommentCount }) => {
+const AddComment = ({ setComments, setCommentsChanged }) => {
     const { article_id } = useParams()
     const [infoMsg, setInfoMsg] = useState('')
     const [newComment, setNewComment] = useState('')
     const userLoggedIn = useContext(UserContext)
-    console.log(userLoggedIn)
-
+    
     const submitComment = (event) => {
         event.preventDefault()
         setComments((currComments) => {
@@ -24,11 +23,11 @@ const AddComment = ({ setComments, setAddCommentCount }) => {
         postArticleComment(article_id, userLoggedIn, newComment)
         .then(() => {
             setInfoMsg('Comment Posted!')
-            setAddCommentCount((currCount) => {currCount++})
+            setCommentsChanged((currCount) => {currCount++})
         })
         .catch((error) => {
             setInfoMsg(`Sorry, there has been an issue with posting the comment. Error Message: "${error.response.data.msg}"`)
-            setAddCommentCount((currCount) => {currCount++})
+            setCommentsChanged((currCount) => {currCount++})
         })
     }
 
