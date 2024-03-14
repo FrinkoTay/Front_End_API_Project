@@ -4,9 +4,21 @@ const shopApi = axios.create({
     baseURL: "https://back-end-api-project-render.onrender.com/api"
 })
 
-export const getArticles = () => {
+export const getArticles = (category) => {
     console.log('in getArticles')
-    return shopApi.get(`/articles`)
+    let endpoint = '/articles'
+    if (category && category !== 'All') {
+        endpoint += `?topic=${category}`
+    }
+    return shopApi.get(endpoint)
+    .then((response) => {
+        return response.data
+    })
+}
+
+export const getTopics = () => {
+    console.log('in getTopics')
+    return shopApi.get('/topics')
     .then((response) => {
         return response.data
     })
