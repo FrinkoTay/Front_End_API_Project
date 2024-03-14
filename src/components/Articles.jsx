@@ -13,7 +13,10 @@ const Articles = () => {
     useEffect(() => {
         getTopics()
         .then((fetchedCategories) => {
-            setCategories(fetchedCategories)
+            setCategories([{
+                slug: 'All',
+                description: 'All Categories'
+            }, ...fetchedCategories])
         })
     }, [])
 

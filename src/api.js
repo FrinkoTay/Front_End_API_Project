@@ -7,7 +7,7 @@ const shopApi = axios.create({
 export const getArticles = (category) => {
     console.log('in getArticles')
     let endpoint = '/articles'
-    if (category) {
+    if (category && category !== 'All') {
         endpoint += `?topic=${category}`
     }
     return shopApi.get(endpoint)
