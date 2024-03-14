@@ -2,23 +2,13 @@ import { getArticles, getTopics } from "../api"
 import { useState, useEffect } from "react"
 import ArticleCard from "./ArticleCard"
 import { useSearchParams, Link } from 'react-router-dom';
+import CategoryBar from "./CategoryBar";
 
 const Articles = () => {
     const [articles, setArticles] = useState([])
-    const [categories, setCategories] = useState([])
     const [isLoading, setIsLoading] = useState('')
     const searchParams = useSearchParams()[0]
     const categoryName = searchParams.get('category')
-
-    useEffect(() => {
-        getTopics()
-        .then((fetchedCategories) => {
-            setCategories([{
-                slug: 'All',
-                description: 'All Categories'
-            }, ...fetchedCategories])
-        })
-    }, [])
 
     useEffect(() => {
         setIsLoading('Loading Articles...')
@@ -30,15 +20,8 @@ const Articles = () => {
     }, [categoryName])
 
     return <header>
+        <CategoryBar/>
         <h2> Articles: </h2>
-        <h3>Categories</h3>
-        <nav>
-            {categories.map((category) => {
-                return <Link key={category.description} 
-                    to={`/articles?category=${category.slug}`}> 
-                    {category.slug} </Link>
-            })}
-        </nav>
         <h1> {isLoading} </h1>
         <div>
             {articles.map((article) => {
