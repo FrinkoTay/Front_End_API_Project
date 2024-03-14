@@ -1,14 +1,26 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { postArticleComment } from '../api';
+// import { setTimeout } from 'timers/promises'
+import UserContext from '../contexts/User';
 
-const AddComment = ({ setComments, setAddCommentCount }) => {
+const AddComment = ({ setComments, setCommentsChanged }) => {
     const { article_id } = useParams()
-    const [infoMsg, setInfoMsg] = useState('')
+    const [infoMsg, setInfoMsg] = useState(null)
     const [newComment, setNewComment] = useState('')
+    const userLoggedIn = useContext(UserContext)
+    
+    const submitButton = () => {
+        if (infoMsg) { 
+            return <p>{infoMsg}</p>
+        } else {
+            return <button type="submit">Post Comment</button>
+        }
+    }
 
     const submitComment = (event) => {
         event.preventDefault()
+        setInfoMsg('Posting Comment...')
         setComments((currComments) => {
             return [{
                 author: 'jessjelly',
@@ -18,14 +30,17 @@ const AddComment = ({ setComments, setAddCommentCount }) => {
             }, ...currComments]
         })
         // default user set to 'jessjelly'
-        postArticleComment(article_id, 'jessjelly', newComment)
+        postArticleComment(article_id, userLoggedIn, newComment)
         .then(() => {
-            setInfoMsg('Comment Posted!')
-            setAddCommentCount((currCount) => {currCount++})
+            setInfoMsg('Comment Posted! Please reload the page if you wish to add another comment.')
+            setCommentsChanged((currCount) => {currCount++})
+            // setTimeout(() => {
+            //     setInfoMsg(null)
+            // }, 5000)
         })
         .catch((error) => {
             setInfoMsg(`Sorry, there has been an issue with posting the comment. Error Message: "${error.response.data.msg}"`)
-            setAddCommentCount((currCount) => {currCount++})
+            setCommentsChanged((currCount) => {currCount++})
         })
     }
 
@@ -46,9 +61,8 @@ const AddComment = ({ setComments, setAddCommentCount }) => {
                 required
                 />
             </label>
-            <button type="submit">Post Comment</button>
+            {submitButton()}
         </form>
-        <p> {infoMsg} </p>
     </div>
 }
 

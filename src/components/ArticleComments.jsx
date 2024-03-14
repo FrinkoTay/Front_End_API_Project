@@ -8,7 +8,7 @@ const ArticleComments = () => {
     const [comments, setComments] = useState([])
     const { article_id } = useParams()
     const [isLoading, setIsLoading] = useState('')
-    const [addCommentCount, setAddCommentCount] = useState(0)
+    const [commentsChanged, setCommentsChanged] = useState(0)
 
     useEffect(() => {
         setIsLoading('Loading Comments...')
@@ -17,18 +17,21 @@ const ArticleComments = () => {
             setComments(fetchedComments)
             setIsLoading('')
         })
-    }, [addCommentCount])
+    }, [commentsChanged])
 
     return <header>
         <h2> Comments: </h2>
         <AddComment 
             setComments={setComments} 
-            setAddCommentCount={setAddCommentCount}
+            setCommentsChanged={setCommentsChanged}
         />
         <h1> {isLoading} </h1>
         <div>
             {comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment}/>
+                return <CommentCard 
+                key={comment.comment_id} 
+                comment={comment}
+                setCommentsChanged={setCommentsChanged}/>
             })}
         </div>
     </header>
