@@ -51,6 +51,7 @@ export const patchArticleVotes = (article_id, increment) => {
 }
 
 export const postArticleComment = (article_id, user, commentBody) => {
+    console.log('in postArticleComment')
     return shopApi.post(`/articles/${article_id}/comments`, {
         username: user,
         body:commentBody
@@ -58,5 +59,6 @@ export const postArticleComment = (article_id, user, commentBody) => {
 }
 
 export const deleteComment = (comment_id) => {
+    console.log('in deleteComment')
     return shopApi.delete(`/comments/${comment_id}`)
 }

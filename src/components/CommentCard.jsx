@@ -14,11 +14,10 @@ const CommentCard = ({comment, setCommentsChanged}) => {
     }
 
     const removeComment = () => {
-        console.log(comment.comment_id)
         setDeleteMsg('Deleting Comment...')
         deleteComment(comment.comment_id)
         .then(() => {
-            setDeleteMsg('Message Deleted.')
+            setDeleteMsg('Comment Deleted.')
         })
         .catch((error) => {
             setDeleteMsg(`Sorry, we could not delete that comment. Error Message: ${error.response.data.msg}`)
