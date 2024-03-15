@@ -19,7 +19,10 @@ const SingleArticle = () => {
         })
         .catch((error) => {
             setIsLoading('')
-            setArticleError(error.response.data.msg)
+            setArticleError({
+                status: error.response.status,
+                msg: error.response.data.msg
+            })
         })
     }
 
@@ -38,14 +41,14 @@ const SingleArticle = () => {
         })
         .catch((error) => {
             setVoteErrorMsg(`Sorry, there has been an issue with voting. Error Message: "${error.response.data.msg}"`)
-            console.log(error.response.data.msg)
             fetchArticle()
         })
     }
 
     const articleContent = () => {
         if (articleError) {
-            return <h1> {`Error: ${articleError}`} </h1>
+            console.log(articleError)
+            return <h1> {`Error ${articleError.status}: ${articleError.msg}`} </h1>
         } else {
             return <div className="article-card">
                 <h3>{article.title}</h3>
