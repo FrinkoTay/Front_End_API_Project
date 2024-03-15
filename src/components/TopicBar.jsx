@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getTopics } from "../api"
 
-const CategoryBar = () => {
+const TopicBar = () => {
     const [categories, setCategories] = useState([])
     const [isLoading, setIsLoading] = useState('')
 
@@ -13,7 +13,7 @@ const CategoryBar = () => {
                 {category.slug} </Link>
         }
         return <Link key={category.description} 
-            to={`/articles?category=${category.slug}`}> 
+            to={`/articles/topics/${category.slug}`}> 
             {category.slug} </Link>
     }
 
@@ -29,8 +29,8 @@ const CategoryBar = () => {
         })
     }, [])
 
-    return <div>
-        <h3>Categories</h3>
+    return <div className="topic-box">
+        <h2>Topics</h2>
         <h3> {isLoading} </h3>
         <nav>
             {categories.map((category) => {
@@ -40,4 +40,4 @@ const CategoryBar = () => {
     </div>
 }
 
-export default CategoryBar
+export default TopicBar
