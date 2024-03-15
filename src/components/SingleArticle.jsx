@@ -47,7 +47,6 @@ const SingleArticle = () => {
 
     const articleContent = () => {
         if (articleError) {
-            console.log(articleError)
             return <h1> {`Error ${articleError.status}: ${articleError.msg}`} </h1>
         } else {
             return <div className="article-card">

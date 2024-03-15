@@ -2,9 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getTopics } from "../api"
 
-const TopicBar = () => {
-    const [categories, setCategories] = useState([])
-    const [isLoading, setIsLoading] = useState('')
+const TopicBar = ({topics, setTopics, isTopicsLoading, setIsTopicsLoading}) => {
 
     const categoryLink = (category) => {
         if (category.slug === 'All') {
@@ -18,11 +16,11 @@ const TopicBar = () => {
     }
 
     useEffect(() => {
-        setIsLoading('Loading...')
+        setIsTopicsLoading('Loading topics...')
         getTopics()
         .then((fetchedCategories) => {
-            setIsLoading('')
-            setCategories([{
+            setIsTopicsLoading('')
+            setTopics([{
                 slug: 'All',
                 description: 'All Categories'
             }, ...fetchedCategories])
@@ -31,9 +29,9 @@ const TopicBar = () => {
 
     return <div className="topic-box">
         <h2>Topics</h2>
-        <h3> {isLoading} </h3>
+        <h3> {isTopicsLoading} </h3>
         <nav>
-            {categories.map((category) => {
+            {topics.map((category) => {
                 return categoryLink(category)
             })}
         </nav>
