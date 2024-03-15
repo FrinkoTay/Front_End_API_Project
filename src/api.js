@@ -4,13 +4,16 @@ const shopApi = axios.create({
     baseURL: "https://back-end-api-project-render.onrender.com/api"
 })
 
-export const getArticles = (category) => {
+export const getArticles = (queryArr) => {
     console.log('in getArticles')
-    let endpoint = '/articles'
-    if (category && category !== 'All') {
-        endpoint += `?topic=${category}`
-    }
-    return shopApi.get(endpoint)
+    let endpoint = ''
+    queryArr.forEach((query) => {
+        if (query.value) {
+            endpoint ? endpoint += '&': endpoint += '?'
+            endpoint += `${query.name}=${query.value}`
+        }
+    })
+    return shopApi.get('/articles' + endpoint)
     .then((response) => {
         return response.data
     })
