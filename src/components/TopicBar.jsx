@@ -2,9 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from "react"
 import { getTopics } from "../api"
 
-const CategoryBar = () => {
-    const [categories, setCategories] = useState([])
-    const [isLoading, setIsLoading] = useState('')
+const TopicBar = ({topics, setTopics, isTopicsLoading, setIsTopicsLoading}) => {
 
     const categoryLink = (category) => {
         if (category.slug === 'All') {
@@ -13,31 +11,31 @@ const CategoryBar = () => {
                 {category.slug} </Link>
         }
         return <Link key={category.description} 
-            to={`/articles?category=${category.slug}`}> 
+            to={`/articles/topics/${category.slug}`}> 
             {category.slug} </Link>
     }
 
     useEffect(() => {
-        setIsLoading('Loading...')
+        setIsTopicsLoading('Loading topics...')
         getTopics()
         .then((fetchedCategories) => {
-            setIsLoading('')
-            setCategories([{
+            setIsTopicsLoading('')
+            setTopics([{
                 slug: 'All',
                 description: 'All Categories'
             }, ...fetchedCategories])
         })
     }, [])
 
-    return <div>
-        <h3>Categories</h3>
-        <h3> {isLoading} </h3>
+    return <div className="topic-box">
+        <h2>Topics</h2>
+        <h3> {isTopicsLoading} </h3>
         <nav>
-            {categories.map((category) => {
+            {topics.map((category) => {
                 return categoryLink(category)
             })}
         </nav>
     </div>
 }
 
-export default CategoryBar
+export default TopicBar

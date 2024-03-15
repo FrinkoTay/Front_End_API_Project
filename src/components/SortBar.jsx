@@ -24,7 +24,7 @@ const SortBar = ({sortBy, setSortBy, order, setOrder}) => {
         })
     }, [])
 
-    return <div>
+    return <div className="sort-by-box">
         <h2>Sort By:</h2>
         <p> {sortByMsg} </p>
         <button key='date' 

@@ -39,3 +39,31 @@ body {
     margin-bottom: 10px;
     margin: 10px;
 }
+
+.topic-box {
+    background-color: rgb(30, 182, 187);
+    width: 50vw;
+    padding: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+.sort-by-box {
+    background-color: rgba(194, 67, 8, 0.75);
+    width: 50vw;
+    padding: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+.nav-box {
+    text-align: center;
+}
