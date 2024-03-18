@@ -8,14 +8,24 @@ const SingleArticle = () => {
     const [voteErrorMsg, setVoteErrorMsg] = useState('')
     const [isLoading, setIsLoading] = useState('')
     const [articleError, setArticleError] = useState('')
+    const [articleDate, setArticleDate] = useState(null)
+
+    const loadDate = () => {
+        if (articleDate === null) {
+            return <p>Date Posted: Loading Date...</p>
+        } else {
+            return <p>Date Posted: {articleDate.toUTCString()} </p>
+        }
+    }
 
     const fetchArticle = () => {
         setIsLoading('Loading Article...')
         getArticleById(article_id)
-        .then((fetchedArticles) => {
+        .then((fetchedArticle) => {
             setArticleError('')
-            setArticle(fetchedArticles)
+            setArticle(fetchedArticle)
             setIsLoading('')
+            setArticleDate(new Date(Date.parse(fetchedArticle.created_at)))
         })
         .catch((error) => {
             setIsLoading('')
@@ -52,11 +62,7 @@ const SingleArticle = () => {
             return <div className="article-card">
                 <h3>{article.title}</h3>
                 <p>Author: {article.author} </p>
-                <p>Date Posted: {article.created_at} {/*
-                article.created_at === undefined ? 
-                ""
-                : toLocaleString(Date(Date.parse(article.created_at)))
-                */} </p>
+                {loadDate()}
                 <p>Topic: {article.topic} </p>
                 <p>Comments: {article.comment_count} </p>
                 <p> {article.body} </p>
