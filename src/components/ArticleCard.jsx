@@ -8,7 +8,7 @@ const ArticleCard = ({article}) => {
         <p>Topic: {article.topic} </p>
         <p>Comments: {article.comment_count} </p>
         <p>Votes: {article.votes}</p>
-        <p>Date: {articleDate.toUTCString()}</p>
+        <p>Date Posted: {articleDate.toUTCString()}</p>
         <img className="article-img" src={ article.article_img_url }></img>
         </Link>
     </div>

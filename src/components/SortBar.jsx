@@ -28,8 +28,8 @@ const SortBar = ({sortBy, setSortBy, order, setOrder}) => {
         <h2>Sort By:</h2>
         <p> {sortByMsg} </p>
         <button key='date' 
-            onClick={() => {setSortBy({displayName:'Date', dbName:'created_at'})}}> 
-            Date
+            onClick={() => {setSortBy({displayName:'Date Posted', dbName:'created_at'})}}> 
+            Date Posted
         </button>
         <button key='comment_count' 
             onClick={() => {setSortBy({displayName:'Comment Count', dbName:'comment_count'})}}> 
